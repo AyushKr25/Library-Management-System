@@ -1,14 +1,113 @@
-# Library-Management-System
-The Library Management System (LMS) is a comprehensive Java-based application designed to streamline and automate the daily operations of a library. In traditional library setups, managing books, user records, and borrowing activities often becomes time-consuming and prone to errors when handled manually. This project was developed to overcome such inefficiencies by creating a structured and automated system that can efficiently manage users, books, and transactions in real time.
+# Library-Manage-System
+## Introduction
 
-The main goal of the Library Management System is to create a platform where both library administrators and users can interact seamlessly. Users can browse, borrow, return, and search for books, while administrators can manage the collection by adding or updating book details. The system provides an intuitive Graphical User Interface (GUI) built using Java Swing, which makes it user-friendly and easy to navigate even for beginners. This interface ensures that users can perform various tasks without needing to understand the technical details of database management or backend operations.
+1. Implement a simple Library Manage System with the following function :
 
-The application follows the Test-Driven Development (TDD) methodology, a modern approach where tests are written before the actual code implementation. This ensures that each component of the system is tested thoroughly during development, leading to a robust and error-free application. The TDD approach not only improves software quality but also enhances maintainability by allowing developers to modify or extend the system without fear of breaking existing functionality. All test cases are handled through JUnit, a popular testing framework in Java, ensuring systematic verification of features like user registration, login, adding books, borrowing, returning, and searching.
+* Create user
+* Login in user
+* Sign out user
+* View all books
+* View all books borrowed by user
+* Add bookItems
+* Borrowed bookItems
+* Return bookItems
+* Search bookItems
 
-The system’s backend is powered by MySQL, which serves as a reliable database to store all the information related to users, books, and borrowing history. The database ensures data integrity and supports operations such as adding new records, retrieving details, and updating book availability. The connection between the Java application and the database is established using JDBC (Java Database Connectivity), allowing smooth communication and real-time updates.
+2. Using TDD (Test-Driven Development) to develope  
+`File : LibraryManageSystem/src/testing`  
+* AllTests.java
+* testAddBookItem.java
+* testBorrowBooks.java
+* testReturnBooks.java
+* testSearchBookItem.java
+* testShowBookItems.java
+* testShowBooksBorrowedByUser.java
+* testUserLogin.java
+* testUserRegister.java  
+#### execute `AllTests.java` to test all Unit
 
-One of the strengths of this project is its clear distinction between user and admin roles. Regular users have limited access to functionalities such as viewing, searching, borrowing, and returning books, while the admin has special privileges, including adding new books to the database and managing the inventory. This role-based access control ensures data security and prevents unauthorized modifications to critical information.
+## Setup
+#### 1. Download and setup MySQL  
+Reference : https://clay-atlas.com/blog/2019/11/16/mysql-mysqlworkbench-tutorial-download-install-steps/
 
-Moreover, the system’s design emphasizes modularity and scalability. Each module (User Management, Book Management, and Borrow-Return Management) is developed as an independent component, making the system easy to maintain and expand. For example, in future versions, additional features such as fine calculation for late returns, book reservation, or digital library integration could be easily implemented.
+#### 2. Import Database  
+Import `Dump20210610.sql` into database  
+`Toolbar : Server >> Data Import`  
+  
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/mysqlDataImport.jpg)
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/mysqlDataImportStart.jpg)
 
-Overall, the Library Management System provides a modern solution to the challenges faced by traditional libraries. By combining Java programming, MySQL database management, GUI-based interfaces, and the TDD development methodology, the project ensures efficiency, accuracy, and reliability. It not only simplifies library operations but also serves as a learning model for software engineering practices, database integration, and test-driven software development.
+#### 3. Set Database userAccount and userPassword  
+`File : LibraryManageSystem/src/development/jdbcConnection.java`  
+Modify `String dbUser = "root";` `String daPassword = "1234";` to your own dbUser and dbPassword  
+```java
+public static Connection dataBaseConnection() {
+  Connection myConnection = null;
+  String url = "jdbc:mysql://localhost:3306/librarymanagesystemdb";
+  String dbUser = "root";
+  String daPassword = "1234";
+  try {
+    //Get a connection to DB
+    myConnection = DriverManager.getConnection(url, dbUser, daPassword);
+
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+
+  return myConnection;
+}
+```
+
+#### 4. Execute `File : LibraryManageSystem/src/development/GUI.java` and it **WILL** work !!!
+
+## Operating Procedures  
+#### 1. Login Interface  
+Click `Register` to sign up a user account  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/loginInterface.jpg)  
+
+#### 2. Register Interface  
+Enter `User Account` , `User Password` and click `Sign Up`  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/registerInterface.jpg)  
+
+### 3. User Login  
+Enter `User Account` , `User Password` and click `Sign In`  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/loginSuccessful.jpg)  
+
+### 4. View All BookItem  
+Click `View All` to show all bookItems  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/viewAll.jpg)  
+
+### 5. Search BookItem
+Enter `Book Name` or `Author` to find the bookItem
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/searchBookItem.jpg)  
+
+### 6. Borrow BookItem
+Click `Borrow` to borrow bookItem  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/borrowBookItemSuccessful.jpg)  
+
+### 7. View All BookItem  
+Click `My Book` to show all bookItem borrowed by user  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/viewMyBook.jpg)  
+
+### 8. Return BookItem
+Click `Return` to borrow bookItem  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/returnBookItem.jpg)  
+
+### 9. Add BookItem
+Click `Sign Out` and login with User Account : `admin` User Password : `1234`  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/adminLogin.jpg)  
+
+Click `Add Book` and enter `Book Name` , `Author` and `Inventory`  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/addBookItem.jpg)  
+
+![image](https://github.com/jasonma1127/Library-Manage-System/blob/main/image/addBookItemResult.jpg)  
